@@ -105,9 +105,9 @@ session_start(); // Start or resume the session
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorii</a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="login.php">Mare</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.php">Munte</a></li>
-                                <li class="nav-item"><a class="nav-link" href="login.php">Orașe</a></li>
+                                <li class="nav-item"><a class="nav-link" href="mare.php">Mare</a></li>
+                                <li class="nav-item"><a class="nav-link" href="munte.php">Munte</a></li>
+                                <li class="nav-item"><a class="nav-link" href="orase.php">Orașe</a></li>
                             </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="login.php">Contact</a></li>
@@ -115,7 +115,7 @@ session_start(); // Start or resume the session
                     </ul>
 
                     <div class="nav-right text-center text-lg-right py-4 py-lg-0">
-              <a class="button" href="login.php">Începe Acum</a>
+              <a class="button" href="login.php">Log Out</a>
             </div>
                 </div> 
             </div>
