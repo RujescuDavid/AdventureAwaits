@@ -11,6 +11,18 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+session_start();
+
+// Verificăm dacă utilizatorul este autentificat
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    // Utilizatorul este autentificat, poți afișa mesajul de bun venit și alte informații relevante
+} else {
+    // Utilizatorul nu este autentificat, poți afișa un mesaj sau redirecționa către pagina de autentificare
+    echo "Bună! Te rugăm să te autentifici pentru a accesa această pagină.";
+    // Poți adăuga și un link către pagina de autentificare
+    echo '<a href="login.php">Autentificare</a>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +71,7 @@ if ($conn->connect_error) {
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container box_1620">
-        <a class="navbar-brand logo_h" href="index.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
+        <a class="navbar-brand logo_h" href="index_autentificat.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -69,7 +81,6 @@ if ($conn->connect_error) {
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
               <li class="nav-item"><a class="nav-link" href="about.php">Despre Noi</a></li> 
-              <li class="nav-item"><a class="nav-link" href="package.php">Packages</a>
               <li class="nav-item"><a class="nav-link" href="lista_bagaj.php">Lista</a></li>
 
 
@@ -84,7 +95,9 @@ if ($conn->connect_error) {
 							</li>
               <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
               <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
-              <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>              
+              <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>  
+              
+                        
             </ul>
 
             <div class="nav-right text-center text-lg-right py-4 py-lg-0">

@@ -4,7 +4,6 @@ session_start();
 // Verificăm dacă utilizatorul este autentificat
 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     // Utilizatorul este autentificat, poți afișa mesajul de bun venit și alte informații relevante
-    echo "Bun venit, " . $_SESSION['email'] . "!";
 } else {
     // Utilizatorul nu este autentificat, poți afișa un mesaj sau redirecționa către pagina de autentificare
     echo "Bună! Te rugăm să te autentifici pentru a accesa această pagină.";
@@ -41,7 +40,8 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container box_1620">
-        <a class="navbar-brand logo_h" href="index.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
+          
+          <a class="navbar-brand logo_h" href="index.php" style="font-size: larger; font-weight: bold;">AdventureAwaits</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -50,28 +50,30 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
-              <li class="nav-item"><a class="nav-link" href="about.php">Despre Noi</a></li> 
-              <li class="nav-item"><a class="nav-link" href="package.php">Packages</a>
+              <li class="nav-item"><a class="nav-link" href="about.php">Despre Noi</a></li>
               <li class="nav-item"><a class="nav-link" href="lista_bagaj.php">Lista</a></li>
 
-
               <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Categorii</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorii</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="mare.php">Munte</a></li>
                   <li class="nav-item"><a class="nav-link" href="munte.php">Mare</a></li>
                   <li class="nav-item"><a class="nav-link" href="orase.php">Orașe</a></li>
                 </ul>
-							</li>
+              </li>
               <li class="nav-item active"><a class="nav-link" href="contact.php">Contact</a></li>
               <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
+              
+              <?php if (isset($_SESSION['email'])): ?>
+                <li class="nav-item"><span class="nav-link"><?php echo htmlspecialchars($_SESSION['email']); ?></span></li>
+              <?php endif; ?>
+
             </ul>
 
             <div class="nav-right text-center text-lg-right py-4 py-lg-0">
               <a class="button" href="logout.php">Log Out</a>
             </div>
-          </div> 
+          </div>
         </div>
       </nav>
     </div>

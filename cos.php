@@ -1,5 +1,18 @@
 <?php
 session_start(); // Start or resume the session
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "proiect_colectiv";
+
+// Conectare la baza de date
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Verificare conexiune
+if ($conn->connect_error) {
+    die("Conexiune eșuată: " . $conn->connect_error);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ro">
@@ -128,27 +141,39 @@ session_start(); // Start or resume the session
     <div class="hero-banner-sm-content text-center">
       
       
-      <?php
-      // Verificați dacă există produse în coș și dacă este gol
-      if (empty($_SESSION['cart'])) {
-          echo "<h2>Coșul tău este gol</h2>";
-      } else {
-          // Afisează conținutul coșului
-          echo "<h2>Coșul tău</h2>";
-          echo "<ul>";
-          foreach ($_SESSION['cart'] as $key => $product) {
-              echo "<li>" . $product['nume_produs'] . " - " . $product['pret'] . " <form action='sterge_din_cos.php' method='post'><input type='hidden' name='id' value='$key'><input type='submit' value='Șterge'></form></li>";
-          }
-          echo "</ul>";
+    <?php
+            if(isset($_SESSION['email'])) {
+                $email = $_SESSION['email'];
+            } else {
+                // Dacă nu există o adresă de email în sesiune, afișăm un mesaj de eroare și oprim execuția scriptului
+                die("Adresa de email lipsește în sesiune!");
+            }
 
-          // Calcularea totalului coșului
-          $total = 0;
-          foreach ($_SESSION['cart'] as $product) {
-              $total += $product['pret'];
-          }
-          echo "<p>Total: " . $total . "</p>";
-      }
-      ?>
+            // Efectuăm o interogare a bazei de date pentru a obține produsele din coș
+            $sql = "SELECT * FROM cos_cumparaturi WHERE email = '$email'";
+            $result = $conn->query($sql);
+
+            // Verificăm dacă există produse în coș
+            if ($result->num_rows > 0) {
+                // Afisăm conținutul coșului
+                echo "<h2>Coșul tău</h2>";
+                echo "<ul>";
+                while($row = $result->fetch_assoc()) {
+                    echo "<li>" . $row['nume_produs'] . " - " . $row['pret'] . " <a href='sterge_din_cos.php?nume=" . $row['nume_produs'] . "'>Șterge</a></li>";
+                }
+                echo "</ul>";
+
+                // Calculăm totalul coșului
+                $total = 0;
+                while($row = $result->fetch_assoc()) {
+                    $total += $row['pret'];
+                }
+                echo "<p>Total: " . $total . "</p>";
+            } else {
+                echo "<h2>Coșul tău este gol</h2>";
+            }
+            ?>
+
 
       
     </div>

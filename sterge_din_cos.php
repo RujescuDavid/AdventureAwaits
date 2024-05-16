@@ -21,19 +21,15 @@ if(isset($_SESSION['email'])) {
     // Dacă nu există o adresă de email în sesiune, afișăm un mesaj de eroare și oprim execuția scriptului
     die("Adresa de email lipsește în sesiune!");
 }
-// Verificăm dacă s-a trimis ID-ul produsului pentru ștergere prin metoda GET
-if(isset($_GET['id']) && !empty($_GET['id'])) {
-    $id = $_GET['id'];
+
+// Verificăm dacă s-a trimis numele produsului pentru ștergere prin metoda GET
+if(isset($_GET['nume']) && !empty($_GET['nume'])) {
+    $nume = $_GET['nume'];
 
     // Interogare SQL pentru ștergerea produsului din coș
-    $sql_delete = "DELETE FROM cos_cumparaturi WHERE id = $id";
+    $sql_delete = "DELETE FROM cos_cumparaturi WHERE email = '$email' AND nume_produs = '$nume'";
 
     if ($conn->query($sql_delete) === TRUE) {
-        // Ștergeți și elementul corespunzător din coșul de cumpărături din sesiune
-        if(isset($_SESSION['cart']) && isset($_SESSION['cart'][$id])) {
-            unset($_SESSION['cart'][$id]);
-        }
-
         // Redirecționează înapoi către pagina coșului de cumpărături
         header("Location: cos.php");
         exit();
@@ -41,10 +37,9 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
         echo "Eroare la ștergerea produsului din baza de date: " . $conn->error;
     }
 } else {
-    // Afișează un mesaj de eroare dacă ID-ul produsului pentru ștergere lipsește sau este invalid
-    echo "ID-ul produsului pentru ștergere lipsește sau este invalid!";
+    // Afișează un mesaj de eroare dacă numele produsului pentru ștergere lipsește sau este invalid
+    echo "Numele produsului pentru ștergere lipsește sau este invalid!";
 }
-
 
 // Închidem conexiunea la baza de date
 $conn->close();

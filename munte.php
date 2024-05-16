@@ -19,7 +19,7 @@ if ($conn->connect_error) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>AdventureAwaits - Munte </title>
+  <title>AdventureAwaits - Munte</title>
 	<link rel="icon" href="img/Fevicon.png" type="image/png">
 
   <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
@@ -32,15 +32,34 @@ if ($conn->connect_error) {
   <link rel="stylesheet" href="vendors/flat-icon/font/flaticon.css">
   <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .btn-add-to-cart {
+        display: inline-block;
+        background-color: #007bff; /* culoare albastră */
+        color: #fff; /* culoare text alb */
+        text-decoration: none;
+        padding: 10px 20px; /* dimensiuni buton */
+        border-radius: 20px; /* colțuri rotunjite */
+         transition: background-color 0.3s ease;  /* efect de tranziție */
+    }
+
+    .btn-add-to-cart:hover {
+        background-color: #0056b3; /* culoare albastră mai închisă la hover */
+    }
+  </style>
+
 </head>
 <body>
 
   <!--================ Header Menu Area start =================-->
+  
+
   <header class="header_area">
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container box_1620">
-        <a class="navbar-brand logo_h" href="index.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
+        <a class="navbar-brand logo_h" href="index_autentificat.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -58,15 +77,15 @@ if ($conn->connect_error) {
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Categorii</a>
                 <ul class="dropdown-menu">
-                <li class="nav-item"><a class="nav-link" href="mare.php">Mare</a></li>
+                  <li class="nav-item"><a class="nav-link" href="mare.php">Mare</a></li>
                   <li class="nav-item"><a class="nav-link" href="munte.php">Munte</a></li>
                   <li class="nav-item"><a class="nav-link" href="orase.php">Orașe</a></li>
                 </ul>
 							</li>
               <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
               <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
+              
               <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>              
-
             </ul>
 
             <div class="nav-right text-center text-lg-right py-4 py-lg-0">
@@ -84,10 +103,11 @@ if ($conn->connect_error) {
   <!--================Hero Banner SM Area Start =================-->
   <section class="hero-banner-sm magic-ball magic-ball-banner" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 0px -80px" data-top-bottom="background-position: 0 100px">
     <div class="container">
-      <div class="hero-banner-sm-content">
+    <div class="hero-banner-sm-content">
         <h1>Munte</h1>
         <p>Explorează frumusețea munților cu pagina noastră de travel pentru destinații montane! Ghiduri detaliate și sfaturi practice pentru a te bucura de aventurile tale în natură.</p>
       </div>
+
     </div>
   </section>
   <!--================Hero Banner SM Area End =================-->
@@ -102,42 +122,44 @@ if ($conn->connect_error) {
     <div class="blog_left_sidebar">
         <?php
         // Fetch data from the database
-        $sql = "SELECT * FROM produse WHERE categorie = 'munte'"; 
+        $sql = $sql = "SELECT * FROM produse WHERE categorie = 'munte'";
         $result = $conn->query($sql);
 
-            // Check if there are any results
+        // Check if there are any results
         if ($result->num_rows > 0) {
-          // Output data of each row
-          while($row = $result->fetch_assoc()) {
-            // Afișăm doar produsele din categoria "mare"
-            echo "<article class='blog_item'>";
-            echo "<div class='blog_item_img'>";
-            echo "<img class='card-img rounded ' src='img/munte/" . $row["imagine"] . "' alt=''>";
-            echo "<a href='#' class='blog_item_date'>";
-            echo "<h3>" . $row["id"] . "</h3>"; // Assuming 'ID' is the primary key
-            echo "</a>";
-            echo "</div>";
-            echo "<div class='blog_details'>";
-            echo "<a class='d-inline-block' href='single-mare.php'>";
-            echo "<h2>" . $row["nume"] . "</h2>";
-            echo "</a>";
-            echo "<p>" . $row["descriere"] . "</p>";
-            echo "<p>" . $row["obiective"] . "</p>";
-            echo "<p>" . $row["pret"] . "</p>";
-            echo "<ul class='blog-info-link'>";
-            echo "<li><a href='#'><i class='far fa-user'></i> Travel, Lifestyle</a></li>";
-            echo "<li><a href='#'><i class='far fa-comments'></i> 03 Comments</a></li>";
-            echo "</ul>";
-            echo"<br></br>";
-            echo "<form action='adauga_in_cos.php' method='post'>";
-            echo "<input type='hidden' name='id' value='" . $row["id"] . "'/>";
-            echo "<input type='hidden' name='nume' value='" . $row["nume"] . "'/>";
-            echo "<input type='hidden' name='pret' value='" . $row["pret"] . "'/>";
-            echo "<button type='submit' class='btn-add-to-cart'><i class='fas fa-shopping-cart'></i> Adaugă în coș</button>";
-            echo "</form>";
-            echo "</div>";
-            echo "</article>";
+            // Output data of each row
+            while($row = $result->fetch_assoc()) {
+              // Afișăm doar produsele din categoria "munte"
+              echo "<article class='blog_item'>";
+              echo "<div class='blog_item_img'>";
+              echo "<img class='card-img rounded ' src='img/munte/" . $row["imagine"] . "' alt=''>";
+              echo "<a href='#' class='blog_item_date'>";
+              echo "<h3>" . $row["id"] . "</h3>"; // Assuming 'ID' is the primary key
+              echo "</a>";
+              echo "</div>";
+              echo "<div class='blog_details'>";
+              echo "<a class='d-inline-block' href='single-mare.php'>";
+              echo "<h2>" . $row["nume"] . "</h2>";
+              echo "</a>";
+              echo "<p>" . $row["descriere"] . "</p>";
+              echo "<p>" . $row["obiective"] . "</p>";
+              echo "<p>" . $row["pret"] . "</p>";
+              echo "<ul class='blog-info-link'>";
+              echo "<li><a href='#'><i class='far fa-user'></i> Travel, Lifestyle</a></li>";
+              echo "<li><a href='#'><i class='far fa-comments'></i> 03 Comments</a></li>";
+              echo "</ul>";
+              echo"<br></br>";
+              echo "<form action='adauga_in_cos.php' method='post'>";
+              echo "<input type='hidden' name='id' value='" . $row["id"] . "'/>";
+              echo "<input type='hidden' name='nume' value='" . $row["nume"] . "'/>";
+              echo "<input type='hidden' name='pret' value='" . $row["pret"] . "'/>";
+              echo "<button type='submit' class='btn-add-to-cart'><i class='fas fa-shopping-cart'></i> Adaugă în coș</button>";
+              echo "</form>";
+              echo "</div>";
+              echo "</article>";
           }
+          
+
         } else {
             echo "0 results";
         }
@@ -256,6 +278,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
+
+
 
  <!-- ================ start footer Area ================= -->
  <footer class="footer-area">

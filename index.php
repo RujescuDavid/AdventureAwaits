@@ -36,7 +36,7 @@
             <ul class="nav navbar-nav menu_nav justify-content-end">
               <li class="nav-item"><a class="nav-link" href="login.php">Despre Noi</a></li> 
               <li class="nav-item"><a class="nav-link" href="login.php">Packages</a>
-              <li class="nav-item"><a class="nav-link" href="lista_bagaj.php">Lista</a></li>
+              <li class="nav-item"><a class="nav-link" href="login.php">Lista</a></li>
 
 
               <li class="nav-item submenu dropdown">
