@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO recenzii (email, titlu, continut) VALUES ('$email', '$titlu', '$continut')";
 
     if ($conn->query($sql) === true) {
-        echo "Recenzia a fost adăugată cu succes.";
+        header("Location: recenzii_autentificat.php");
+    exit();
     } else {
         echo "Eroare la adăugarea recenziei: " . $conn->error;
     }

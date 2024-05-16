@@ -4,7 +4,6 @@ session_start();
 // Verificăm dacă utilizatorul este autentificat
 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     // Utilizatorul este autentificat, poți afișa mesajul de bun venit și alte informații relevante
-    echo "Bun venit, " . $_SESSION['email'] . "!";
 } else {
     // Utilizatorul nu este autentificat, poți afișa un mesaj sau redirecționa către pagina de autentificare
     echo "Bună! Te rugăm să te autentifici pentru a accesa această pagină.";
@@ -58,13 +57,15 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Categorii</a>
                 <ul class="dropdown-menu">
-                <li class="nav-item"><a class="nav-link" href="mare.php">Munte</a></li>
-                  <li class="nav-item"><a class="nav-link" href="munte.php">Mare</a></li>
+                <li class="nav-item"><a class="nav-link" href="mare.php">Mare</a></li>
+                  <li class="nav-item"><a class="nav-link" href="munte.php">Munte</a></li>
                   <li class="nav-item"><a class="nav-link" href="orase.php">Orașe</a></li>
                 </ul>
 							</li>
               <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
+              <li class="nav-item"><a class="nav-link" href="recenzii_autentificat.php">Recenzii</a></li>
+              <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>              
+
             </ul>
 
             <div class="nav-right text-center text-lg-right py-4 py-lg-0">

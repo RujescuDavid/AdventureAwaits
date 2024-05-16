@@ -102,7 +102,7 @@ if ($conn->connect_error) {
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container box_1620">
-                <a class="navbar-brand logo_h" href="index.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
+                <a class="navbar-brand logo_h" href="index_autentificat.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -111,8 +111,8 @@ if ($conn->connect_error) {
 
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav justify-content-end">
-                        <li class="nav-item"><a class="nav-link" href="login.php">Despre Noi</a></li> 
-                        <li class="nav-item"><a class="nav-link" href="login.php">Pachete</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.php">Despre Noi</a></li> 
+                        <li class="nav-item"><a class="nav-link" href="package.php">Package</a></li>
                         <li class="nav-item"><a class="nav-link" href="lista_bagaj.php">Lista</a></li>
 
                         <li class="nav-item submenu dropdown">
@@ -123,8 +123,10 @@ if ($conn->connect_error) {
                                 <li class="nav-item"><a class="nav-link" href="orase.php">Orașe</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="login.php">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="recenzii_autentificat.php">Recenzii</a></li>              
+                        <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>                         
+
                     </ul>
 
                     <div class="nav-right text-center text-lg-right py-4 py-lg-0">
@@ -149,32 +151,29 @@ if ($conn->connect_error) {
                 die("Adresa de email lipsește în sesiune!");
             }
 
-            // Efectuăm o interogare a bazei de date pentru a obține produsele din coș
-            $sql = "SELECT * FROM cos_cumparaturi WHERE email = '$email'";
+            // Efectuăm o interogare a bazei de date pentru a obține produsele din coș și pentru a calcula totalul
+            $sql = "SELECT *, SUM(pret) AS total FROM cos_cumparaturi WHERE email = '$email' GROUP BY nume_produs";
             $result = $conn->query($sql);
 
             // Verificăm dacă există produse în coș
             if ($result->num_rows > 0) {
-                // Afisăm conținutul coșului
+                // Afișăm conținutul coșului
                 echo "<h2>Coșul tău</h2>";
                 echo "<ul>";
                 while($row = $result->fetch_assoc()) {
                     echo "<li>" . $row['nume_produs'] . " - " . $row['pret'] . " <a href='sterge_din_cos.php?nume=" . $row['nume_produs'] . "'>Șterge</a></li>";
                 }
-                echo "</ul>";
-
-                // Calculăm totalul coșului
+                // Afișăm totalul pentru toate produsele din coș
                 $total = 0;
-                while($row = $result->fetch_assoc()) {
-                    $total += $row['pret'];
+                foreach ($result as $row) {
+                    $total += $row['total'];
                 }
-                echo "<p>Total: " . $total . "</p>";
+                echo "<strong>Total: " . $total . "</strong>";
+                echo "</ul>";
             } else {
                 echo "<h2>Coșul tău este gol</h2>";
             }
-            ?>
-
-
+    ?>
       
     </div>
   </div>

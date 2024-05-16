@@ -12,6 +12,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,8 +41,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container box_1620">
-          
-          <a class="navbar-brand logo_h" href="index.php" style="font-size: larger; font-weight: bold;">AdventureAwaits</a>
+        <a class="navbar-brand logo_h" href="index.php" style="font-size: bigger; font-weight: bold;">AdventureAwaits</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -50,30 +50,30 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav justify-content-end">
-              <li class="nav-item"><a class="nav-link" href="about.php">Despre Noi</a></li>
+              <li class="nav-item"><a class="nav-link" href="about.php">Despre Noi</a></li> 
+              <li class="nav-item"><a class="nav-link" href="package.php">Packages</a>
               <li class="nav-item"><a class="nav-link" href="lista_bagaj.php">Lista</a></li>
 
+
               <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorii</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Categorii</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="mare.php">Munte</a></li>
-                  <li class="nav-item"><a class="nav-link" href="munte.php">Mare</a></li>
+                  <li class="nav-item"><a class="nav-link" href="mare.php">Mare</a></li>
+                  <li class="nav-item"><a class="nav-link" href="munte.php">Munte</a></li>
                   <li class="nav-item"><a class="nav-link" href="orase.php">Orașe</a></li>
                 </ul>
-              </li>
+							</li>
               <li class="nav-item active"><a class="nav-link" href="contact.php">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
-              
-              <?php if (isset($_SESSION['email'])): ?>
-                <li class="nav-item"><span class="nav-link"><?php echo htmlspecialchars($_SESSION['email']); ?></span></li>
-              <?php endif; ?>
+              <li class="nav-item"><a class="nav-link" href="recenzii_autentificat.php">Recenzii</a></li>
+              <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>              
 
             </ul>
 
             <div class="nav-right text-center text-lg-right py-4 py-lg-0">
               <a class="button" href="logout.php">Log Out</a>
             </div>
-          </div>
+          </div> 
         </div>
       </nav>
     </div>
@@ -113,12 +113,12 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
           <h2 class="contact-title">Spune-ne care sunt problemele tale.</h2>
         </div>
         <div class="col-lg-8">
-          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contact_process.php" novalidate="novalidate">
+          <form class="form-contact contact_form" action="contact_process.php" method="post" id="contact.php" novalidate="novalidate">
             <div class="row">
               
               <div class="col-sm-6">
                 <div class="form-group">
-                  <input class="form-control" name="name" id="name" type="text" placeholder="Numele Tău">
+                  <input class="form-control" name="nume" id="name" type="text" placeholder="Numele Tău">
                 </div>
               </div>
               <div class="col-sm-6">
@@ -128,12 +128,12 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <input class="form-control" name="subject" id="subject" type="text" placeholder="Subiectul Discuției">
+                  <input class="form-control" name="subiect" id="subject" type="text" placeholder="Subiectul Discuției">
                 </div>
               </div>
               <div class="col-12">
                 <div class="form-group">
-                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Mesajul Tău"></textarea>
+                    <textarea class="form-control w-100" name="mesaj" id="message" cols="30" rows="9" placeholder="Mesajul Tău"></textarea>
                 </div>
               </div>
             </div>

@@ -83,7 +83,7 @@ if ($conn->connect_error) {
                 </ul>
 							</li>
               <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-              <li class="nav-item"><a class="nav-link" href="recenzii.php">Recenzii</a></li>
+              <li class="nav-item"><a class="nav-link" href="recenzii_autentificat.php">Recenzii</a></li>
               
               <li class="nav-item"><a class="nav-link" href="cos.php">Cosul Meu</a></li>              
             </ul>
